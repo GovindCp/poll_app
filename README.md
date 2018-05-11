@@ -1,2 +1,5 @@
-# poll_app
-This is a voting application.
+Poll Service
+
+Run the project:
+npm install
+node server.js

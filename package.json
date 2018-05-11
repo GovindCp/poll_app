@@ -1,0 +1,23 @@
+{
+  "name": "poll-app",
+  "version": "1.0.0",
+  "description": "This is a voting app.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://Govind23@34.195.167.146/neomegha/dfp-auth-service.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
+    "express": "^4.16.3",
+    "jsonwebtoken": "^8.2.1",
+    "mongoose": "^5.0.18",
+    "validate.js": "^0.12.0"
+  }
+}

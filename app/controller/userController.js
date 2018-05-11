@@ -13,7 +13,7 @@ function register(req, res) {
     return UserModel.findOne({ email: req.body.email });
   }).then((userData) => {
     if(!userData && userData==null){
-      let user = new UserModel({
+      var user = new UserModel({
         name: req.body.name,
         age: req.body.age,
         address: req.body.address,

@@ -1,0 +1,396 @@
+{
+	"info": {
+		"name": "Poll Collection",
+		"_postman_id": "14a00caf-bb40-799b-4f7e-610746f527c1",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Register User",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\":\"Govind\",\n\t\"age\":\"23\",\n\t\"address\":\"Kormangala 8th Block\",\n\t\"email\":\"a@b.com\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8420/api/prelogin/v1/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8420",
+					"path": [
+						"api",
+						"prelogin",
+						"v1",
+						"register"
+					]
+				},
+				"description": "Using this app user can register himself for the poll.\n\nbody : \n{\n\t\"name\":\"Govind\",\n\t\"age\":\"23\",\n\t\"address\":\"Kormangala 8th Block\",\n\t\"email\":\"c@c.com\"\n}\nresponse :\n{\n    \"success\": true,\n    \"data\": {\n        \"isActive\": true,\n        \"_id\": \"5af4a5a29a11402480f16875\",\n        \"name\": \"Govind\",\n        \"age\": 23,\n        \"address\": \"Kormangala 8th Block\",\n        \"email\": \"c@c.com\",\n        \"createdAt\": \"2018-05-10T20:03:46.651Z\",\n        \"updatedAt\": \"2018-05-10T20:03:46.651Z\",\n        \"password\": \"HREVWVUP\"\n    }\n}\nUser can use given password for further login into the app."
+			},
+			"response": []
+		},
+		{
+			"name": "Login User",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"email\":\"a@b.com\",\n\t\"password\":\"HG8WWFD5\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8420/api/prelogin/v1/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8420",
+					"path": [
+						"api",
+						"prelogin",
+						"v1",
+						"login"
+					]
+				},
+				"description": "User can login into the app using this endpoint.\nbody:\n{\n\t\"email\":\"c@c.com\",\n\t\"password\":\"HREVWVUP\"\n}\nresponse:\n{\n    \"success\": true,\n    \"data\": {\n        \"_id\": \"5af4a5a29a11402480f16875\",\n        \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc0FjdGl2ZSI6dHJ1ZSwiX2lkIjoiNWFmNGE1YTI5YTExNDAyNDgwZjE2ODc1IiwibmFtZSI6IkdvdmluZCIsImFnZSI6MjMsImFkZHJlc3MiOiJLb3JtYW5nYWxhIDh0aCBCbG9jayIsImVtYWlsIjoiY0BjLmNvbSIsImNyZWF0ZWRBdCI6IjIwMTgtMDUtMTBUMjA6MDM6NDYuNjUxWiIsInVwZGF0ZWRBdCI6IjIwMTgtMDUtMTBUMjA6MDQ6MDguNzY2WiIsImxhc3Rsb2dpbiI6IjIwMTgtMDUtMTBUMjA6MDQ6MDguNzY1WiIsImlhdCI6MTUyNTk4MjY0OCwiZXhwIjoxNTI2MDY5MDQ4fQ.AhBKmScM4z_GJPnpV_MPSm5fKqsYqTbV6oNluipPtmE\"\n    }\n}\nUser can use this token to perform further operations.Pass this token as header (X-Access-Token) for any poll operations"
+			},
+			"response": []
+		},
+		{
+			"name": "Forgot Password",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"email\":\"a@b.com\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8420/api/prelogin/v1/forgotpassword",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8420",
+					"path": [
+						"api",
+						"prelogin",
+						"v1",
+						"forgotpassword"
+					]
+				},
+				"description": "In case if user forget his password,using this endpoint he/she can request for otp (validity 5 mins).\nbody:\n{\n\t\"email\":\"a@b.com\"\n}\nresponse:\n{\n    \"success\": true,\n    \"otp\": \"JMLWMRLA\"\n}\nUser can use this otp to change his password.Pass the given otp to verifyOtp."
+			},
+			"response": []
+		},
+		{
+			"name": "Verify Otp",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"email\":\"\",\n\t\"otp\":\"\",\n\t\"newpassword\":\"\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8420/api/verifyotp",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8420",
+					"path": [
+						"api",
+						"verifyotp"
+					]
+				},
+				"description": "User can use this enpoint to verify its new generated otp & change his new password.\nbody: \n{\n\t\"email\":\"a@b.com\",\n\t\"otp\": \"HG564JHG\",\n\t\"newPassword\":\"123\",\n\t\"confirmPassword\":\"123\"\n}\nresponse:\n{\n    \"success\": true,\n    \"message\": \"Password changed successfully.\"\n}\n\nUser password will change & user can login with new password."
+			},
+			"response": []
+		},
+		{
+			"name": "Create Poll",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "X-Access-Token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc0FjdGl2ZSI6dHJ1ZSwiX2lkIjoiNWFmNDE2MGI5ZGVjZWMzMTI4Y2M3MDg4IiwibmFtZSI6IkdvdmluZCIsImFnZSI6MjMsImFkZHJlc3MiOiJLb3JtYW5nYWxhIDh0aCBCbG9jayIsImVtYWlsIjoiYUBiLmNvbSIsImNyZWF0ZWRBdCI6IjIwMTgtMDUtMTBUMDk6NTE6MDcuNDg3WiIsInVwZGF0ZWRBdCI6IjIwMTgtMDUtMTBUMTA6MzQ6MTMuMDU4WiIsImxhc3Rsb2dpbiI6IjIwMTgtMDUtMTBUMTA6MzQ6MTMuMDU1WiIsImlhdCI6MTUyNTk0ODQ1MywiZXhwIjoxNTI2MDM0ODUzfQ.vfuGtnCViLObqxCYWIEQeExCfElMzL5HVGRd1Z_zZLo"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"subject\":\"who will be the next EM?\",\n\t\"options\":[\"A\",\"B\",\"C\"]\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8420/api/v1/poll/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8420",
+					"path": [
+						"api",
+						"v1",
+						"poll",
+						"create"
+					]
+				},
+				"description": "User can create Poll :\nbody :\n{\n\t\"subject\":\"Where should we plan our next trip ?\"\n\t\"options\":[\"Kerala\",\"Pondi\",\"Gokarna\"]\n}\nresponse:\n{\n    \"success\": true,\n    \"data\": {\n        \"isActive\": true,\n        \"_id\": \"5af4a1ea1ab83e0f3422aace\",\n        \"subject\": \"Where should we plan our next trip?\",\n        \"options\": [\n            {\n                \"value\": \"Kerala\",\n                \"vote_count\": 0\n            },\n            {\n                \"value\": \"Pondi\",\n                \"vote_count\": 0\n            },\n            {\n                \"value\": \"Gokarna\",\n                \"vote_count\": 0\n            },\n            {\n                \"value\": \"custom\",\n                \"vote_count\": 0,\n                \"customDet\": []\n            }\n        ],\n        \"userId\": \"5af4a0d5f7e2e332d4cac96f\",\n        \"createdAt\": \"2018-05-10T19:47:54.605Z\",\n        \"updatedAt\": \"2018-05-10T19:47:54.605Z\",\n        \"__v\": 0\n    }\n}\n\nUser will get reponse with one custom options two."
+			},
+			"response": []
+		},
+		{
+			"name": "Get Poll Details",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "X-Access-Token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc0FjdGl2ZSI6dHJ1ZSwiX2lkIjoiNWFmNDE2MGI5ZGVjZWMzMTI4Y2M3MDg4IiwibmFtZSI6IkdvdmluZCIsImFnZSI6MjMsImFkZHJlc3MiOiJLb3JtYW5nYWxhIDh0aCBCbG9jayIsImVtYWlsIjoiYUBiLmNvbSIsImNyZWF0ZWRBdCI6IjIwMTgtMDUtMTBUMDk6NTE6MDcuNDg3WiIsInVwZGF0ZWRBdCI6IjIwMTgtMDUtMTBUMTA6MzQ6MTMuMDU4WiIsImxhc3Rsb2dpbiI6IjIwMTgtMDUtMTBUMTA6MzQ6MTMuMDU1WiIsImlhdCI6MTUyNTk0ODQ1MywiZXhwIjoxNTI2MDM0ODUzfQ.vfuGtnCViLObqxCYWIEQeExCfElMzL5HVGRd1Z_zZLo"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8420/api/v1/poll/get?pollId=5af43617258bfd2314147b01",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8420",
+					"path": [
+						"api",
+						"v1",
+						"poll",
+						"get"
+					],
+					"query": [
+						{
+							"key": "pollId",
+							"value": "5af43617258bfd2314147b01",
+							"equals": true
+						}
+					]
+				},
+				"description": "User can fetch the poll details using pollId.\nPass \"pollId\" as query param."
+			},
+			"response": []
+		},
+		{
+			"name": "Get Polls List",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "X-Access-Token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc0FjdGl2ZSI6dHJ1ZSwiX2lkIjoiNWFmNGEwZDVmN2UyZTMzMmQ0Y2FjOTZmIiwibmFtZSI6IkdvdmluZCIsImFnZSI6MjMsImFkZHJlc3MiOiJLb3JtYW5nYWxhIDh0aCBCbG9jayIsImVtYWlsIjoiYkBjLmNvbSIsImNyZWF0ZWRBdCI6IjIwMTgtMDUtMTBUMTk6NDM6MTcuNjkwWiIsInVwZGF0ZWRBdCI6IjIwMTgtMDUtMTBUMTk6NDM6MzguMjQwWiIsImxhc3Rsb2dpbiI6IjIwMTgtMDUtMTBUMTk6NDM6MzguMjQwWiIsImlhdCI6MTUyNTk4MTQxOCwiZXhwIjoxNTI2MDY3ODE4fQ.UB03Df1yYY3J1mP7DfcNM1m6O_TtawYRpC_D9TFRlvw"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8420/api/v1/poll/list?createdbyme=true",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8420",
+					"path": [
+						"api",
+						"v1",
+						"poll",
+						"list"
+					],
+					"query": [
+						{
+							"key": "createdbyme",
+							"value": "true",
+							"equals": true
+						}
+					]
+				},
+				"description": "User can fetch all active/inactive polls.\nto fetch only own polls pass 'createdbyme=true' in query params."
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Poll",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "X-Access-Token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc0FjdGl2ZSI6dHJ1ZSwiX2lkIjoiNWFmNDE2MGI5ZGVjZWMzMTI4Y2M3MDg4IiwibmFtZSI6IkdvdmluZCIsImFnZSI6MjMsImFkZHJlc3MiOiJLb3JtYW5nYWxhIDh0aCBCbG9jayIsImVtYWlsIjoiYUBiLmNvbSIsImNyZWF0ZWRBdCI6IjIwMTgtMDUtMTBUMDk6NTE6MDcuNDg3WiIsInVwZGF0ZWRBdCI6IjIwMTgtMDUtMTBUMTA6MzQ6MTMuMDU4WiIsImxhc3Rsb2dpbiI6IjIwMTgtMDUtMTBUMTA6MzQ6MTMuMDU1WiIsImlhdCI6MTUyNTk0ODQ1MywiZXhwIjoxNTI2MDM0ODUzfQ.vfuGtnCViLObqxCYWIEQeExCfElMzL5HVGRd1Z_zZLo"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"pollId\":\"5af43617258bfd2314147b01\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8420/api/v1/poll/delete",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8420",
+					"path": [
+						"api",
+						"v1",
+						"poll",
+						"delete"
+					]
+				},
+				"description": "User can delete the created polls.\n\nUser can only delete his created polls.\n\nUser can not delete active polls,he has to deactivate the poll first then only he can able to delete from the list.\nDeleted polls will no longer accessible from anywhere.If user want to stop other user to cast there vote,please use deactivate poll."
+			},
+			"response": []
+		},
+		{
+			"name": "Deactivate Poll",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "X-Access-Token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc0FjdGl2ZSI6dHJ1ZSwiX2lkIjoiNWFmNDE2MGI5ZGVjZWMzMTI4Y2M3MDg4IiwibmFtZSI6IkdvdmluZCIsImFnZSI6MjMsImFkZHJlc3MiOiJLb3JtYW5nYWxhIDh0aCBCbG9jayIsImVtYWlsIjoiYUBiLmNvbSIsImNyZWF0ZWRBdCI6IjIwMTgtMDUtMTBUMDk6NTE6MDcuNDg3WiIsInVwZGF0ZWRBdCI6IjIwMTgtMDUtMTBUMTA6MzQ6MTMuMDU4WiIsImxhc3Rsb2dpbiI6IjIwMTgtMDUtMTBUMTA6MzQ6MTMuMDU1WiIsImlhdCI6MTUyNTk0ODQ1MywiZXhwIjoxNTI2MDM0ODUzfQ.vfuGtnCViLObqxCYWIEQeExCfElMzL5HVGRd1Z_zZLo"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"pollId\":\"\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8420/api/v1/poll/deactivate",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8420",
+					"path": [
+						"api",
+						"v1",
+						"poll",
+						"deactivate"
+					]
+				},
+				"description": "User this enpoint user can stop voting on the created poll.Deactivate poll are accessible to any user to see the final score or result.\n"
+			},
+			"response": []
+		},
+		{
+			"name": "Get Deactivate Poll",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "X-Access-Token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc0FjdGl2ZSI6dHJ1ZSwiX2lkIjoiNWFmNDE2MGI5ZGVjZWMzMTI4Y2M3MDg4IiwibmFtZSI6IkdvdmluZCIsImFnZSI6MjMsImFkZHJlc3MiOiJLb3JtYW5nYWxhIDh0aCBCbG9jayIsImVtYWlsIjoiYUBiLmNvbSIsImNyZWF0ZWRBdCI6IjIwMTgtMDUtMTBUMDk6NTE6MDcuNDg3WiIsInVwZGF0ZWRBdCI6IjIwMTgtMDUtMTBUMTA6MzQ6MTMuMDU4WiIsImxhc3Rsb2dpbiI6IjIwMTgtMDUtMTBUMTA6MzQ6MTMuMDU1WiIsImlhdCI6MTUyNTk0ODQ1MywiZXhwIjoxNTI2MDM0ODUzfQ.vfuGtnCViLObqxCYWIEQeExCfElMzL5HVGRd1Z_zZLo"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"pollId\":\"5af4443e258bfd2314147b02\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8420/api/v1/poll/deactivate",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8420",
+					"path": [
+						"api",
+						"v1",
+						"poll",
+						"deactivate"
+					]
+				},
+				"description": "User can list down all the deactivated polls using this endpoint."
+			},
+			"response": []
+		},
+		{
+			"name": "Update Poll",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "X-Access-Token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc0FjdGl2ZSI6dHJ1ZSwiX2lkIjoiNWFmNDE2MGI5ZGVjZWMzMTI4Y2M3MDg4IiwibmFtZSI6IkdvdmluZCIsImFnZSI6MjMsImFkZHJlc3MiOiJLb3JtYW5nYWxhIDh0aCBCbG9jayIsImVtYWlsIjoiYUBiLmNvbSIsImNyZWF0ZWRBdCI6IjIwMTgtMDUtMTBUMDk6NTE6MDcuNDg3WiIsInVwZGF0ZWRBdCI6IjIwMTgtMDUtMTBUMTA6MzQ6MTMuMDU4WiIsImxhc3Rsb2dpbiI6IjIwMTgtMDUtMTBUMTA6MzQ6MTMuMDU1WiIsImlhdCI6MTUyNTk0ODQ1MywiZXhwIjoxNTI2MDM0ODUzfQ.vfuGtnCViLObqxCYWIEQeExCfElMzL5HVGRd1Z_zZLo"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"pollId\":\"5af444cbd614d82ebc945b65\",\n\t\"option\":\"custom\",\n\t\"custom_text\":\"NA\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8420/api/v1/poll/update",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8420",
+					"path": [
+						"api",
+						"v1",
+						"poll",
+						"update"
+					]
+				},
+				"description": "User can cast there vote using this endpoint.\nUser can't able to cast multiple vote for the same poll.\nIf user pass custom option then custom_text will be mandatory field.\n(with custom options)\nbody :\n{\n\t\"pollId\":\"5af444cbd614d82ebc945b65\",\n\t\"option\":\"custom\",\n\t\"custom_text\":\"Modi\"\n}\n(without custom option)\nbody:\n{\n\t\"pollId\":\"5af444cbd614d82ebc945b65\",\n\t\"option\":\"C\"\n}\nresponse:\n{\n    \"success\": true,\n    \"data\": {\n        \"isActive\": true,\n        \"_id\": \"5af444cbd614d82ebc945b65\",\n        \"subject\": \"who will be the next EM?\",\n        \"options\": [\n            {\n                \"value\": \"A\",\n                \"vote_count\": 0\n            },\n            {\n                \"value\": \"B\",\n                \"vote_count\": 1\n            },\n            {\n                \"value\": \"C\",\n                \"vote_count\": 0\n            },\n            {\n                \"value\": \"custom\",\n                \"vote_count\": 2,\n                \"customDet\": [\n                    \"NA\",\n                    \"Modi\"\n                ]\n            }\n        ],\n        \"userId\": \"5af4160b9decec3128cc7088\",\n        \"createdAt\": \"2018-05-10T13:10:35.848Z\",\n        \"updatedAt\": \"2018-05-10T20:04:51.941Z\",\n        \"__v\": 0,\n        \"voters\": [\n            \"5af4160b9decec3128cc7088\",\n            \"5af4a0d5f7e2e332d4cac96f\",\n            \"5af4a5a29a11402480f16875\"\n        ]\n    }\n}\n"
+			},
+			"response": []
+		}
+	]
+}

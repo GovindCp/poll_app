@@ -5,36 +5,59 @@ const validator = require("../../validators/reqValidator"),
   config = require('../../config/env'),
   bcrypt = require('bcrypt-nodejs');
 
-// Register user for poll
+// Register a new user (admin or employee)
 function register(req, res) {
-  var pwd;
+  let generatedPassword;
+  const payload = Object.assign({}, req.body);
+  if (payload.dateOfJoining) {
+    payload.dateOfJoining = new Date(payload.dateOfJoining);
+    if (isNaN(payload.dateOfJoining.getTime())) {
+      return res.status(400).send({ success: false, message: 'Invalid dateOfJoining' });
+    }
+  }
   // validating request params
-  validator.userRegValidate(req.body).then((data) => {
+  validator.userRegValidate(req.body).then(() => {
     return UserModel.findOne({ email: req.body.email });
   }).then((userData) => {
-    if(!userData && userData==null){
-      var user = new UserModel({
-        name: req.body.name,
-        age: req.body.age,
-        address: req.body.address,
-        email: req.body.email,
-        password: pwd = randomString() // setting password
-      });
-      return user.save();
-    }else{
-      throw "User is already registered!!"
+    if (userData) {
+      throw "User is already registered!!";
     }
+    const passwordToApply = req.body.password && req.body.password.trim() !== "" ? req.body.password : randomString(12);
+    if (!req.body.password) {
+      generatedPassword = passwordToApply;
+    }
+    const user = new UserModel({
+      name: req.body.name,
+      age: req.body.age,
+      address: req.body.address,
+      email: req.body.email,
+      role: req.body.role,
+      department: req.body.department,
+      designation: req.body.designation,
+      dateOfJoining: payload.dateOfJoining,
+      createdBy: req.body.createdBy || null
+    });
+    user.password = passwordToApply;
+    return user.save();
   }).then((userDet) => {
     userDet = userDet.toObject();
-    userDet.password = pwd;
-    delete userDet.__v;
-    delete userDet.hash;
-    delete userDet.salt
-    delete userDet.otptime;
-    return res.status(200).send({success:true,data:userDet});
+    const response = {
+      _id: userDet._id,
+      name: userDet.name,
+      email: userDet.email,
+      role: userDet.role,
+      department: userDet.department,
+      designation: userDet.designation,
+      dateOfJoining: userDet.dateOfJoining,
+      temporaryPassword: generatedPassword
+    };
+    if (!generatedPassword) {
+      delete response.temporaryPassword;
+    }
+    return res.status(200).send({success:true,data:response});
   }).catch((err) => {
     return res.status(400).send({success:false,message: err.errmsg || err });
-  })
+  });
 }
 
 // User login
@@ -51,15 +74,21 @@ function login(req, res) {
               throw err;
             }
             userDet = userDet.toObject();
-            delete userDet.__v;
-            delete userDet.hash;
-            delete userDet.salt
-            delete userDet.otptime;
-            // Generating token
-            var result = {};
-            result._id = userDet._id;
-            result.token =  __generateToken(userDet);
-            return res.status(200).send({success:true,data:result})
+              delete userDet.__v;
+              delete userDet.hash;
+              delete userDet.salt;
+              delete userDet.otptime;
+              // Generating token
+              var result = {
+                _id: userDet._id,
+                token: __generateToken(userDet),
+                name: userDet.name,
+                email: userDet.email,
+                role: userDet.role,
+                department: userDet.department,
+                designation: userDet.designation
+              };
+              return res.status(200).send({success:true,data:result})
           });
         }else{
           return res.status(400).send({success:true,message:"Invalid Credentials!!"});
@@ -133,10 +162,10 @@ function __generateToken(user) {
   return token;
 }
 
-function randomString() {
+function randomString(length = 8) {
   var chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
   var result = '';
-  for (var i = 8; i > 0; --i) {
+  for (var i = length; i > 0; --i) {
     result += chars[Math.round(Math.random() * (chars.length - 1))];
   }
   return result;

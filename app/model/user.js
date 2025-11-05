@@ -24,6 +24,25 @@ var UserSchema = new Schema({
       lowercase: true,
       unique: true
     },
+    role: {
+      type: String,
+      enum: ['admin', 'employee'],
+      default: 'employee',
+      index: true
+    },
+    department: {
+      type: String
+    },
+    designation: {
+      type: String
+    },
+    dateOfJoining: {
+      type: Date
+    },
+    createdBy: {
+      type: Schema.Types.ObjectId,
+      ref: 'User'
+    },
     isActive: {
       type: Boolean,
       default: true

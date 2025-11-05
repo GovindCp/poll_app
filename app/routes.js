@@ -1,15 +1,19 @@
 const express = require("express"),
-    UserController = require("../app/controller/userController");
-    PollController = require("../app/controller/pollController");
+    ModuleController = require("../app/controller/moduleController"),
+    AssignmentController = require("../app/controller/assignmentController");
 
 const router = express.Router();
-router.post("/poll/create", PollController.createPoll);
-router.get("/poll/get", PollController.getPollDetails);
-router.get("/poll/list", PollController.getPollList);
-router.put("/poll/deactivate", PollController.deactivatePoll);
-router.delete("/poll/delete", PollController.delatePoll);
-router.get("/poll/deactivate", PollController.getDeactivatedPoll);
-router.post("/poll/update", PollController.updatePoll);
+
+// Module management
+router.post("/modules", ModuleController.createModule);
+router.put("/modules/:moduleId", ModuleController.updateModule);
+router.get("/modules", ModuleController.listModules);
+router.get("/modules/:moduleId", ModuleController.getModule);
+
+// Assignment management
+router.post("/assignments", AssignmentController.assignModule);
+router.get("/assignments", AssignmentController.listAssignments);
+router.patch("/assignments/:assignmentId", AssignmentController.updateAssignment);
 
 module.exports = router;
 

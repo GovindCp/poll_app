@@ -73,7 +73,7 @@ function deactivatePoll(req, res) {
     })
 }
 
-function delatePoll(req, res) {
+function deletePoll(req, res) {
     validator.deletePollValidate(req.body).then((data) => {
         return PollModel.findOneAndRemove({_id:req.body.pollId,userId:req.currentUser._id,isActive:false});
     }).then((updateDet) => {
@@ -87,7 +87,7 @@ function delatePoll(req, res) {
 }
 
 function getDeactivatedPoll(req, res) {
-    validator.getDeactivatePollValidate(req.body).then((data) => {
+    validator.getDeactivatePollValidate(req.query).then((data) => {
         return PollModel.find({isActive:false});
     }).then((pollData) => {
         return res.status(200).send({success:true,data:pollData});
@@ -129,7 +129,7 @@ module.exports = {
     getPollDetails,
     getPollList,
     deactivatePoll,
-    delatePoll,
+    deletePoll,
     getDeactivatedPoll,
     updatePoll
 }

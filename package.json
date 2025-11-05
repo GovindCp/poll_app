@@ -1,7 +1,7 @@
 {
-  "name": "poll-app",
+  "name": "onboarding-training-service",
   "version": "1.0.0",
-  "description": "This is a voting app.",
+  "description": "API for managing onboarding modules and assignments.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
